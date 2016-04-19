@@ -2,7 +2,9 @@ require 'spec_helper'
 
 describe 'helloworld::nginx' do
   cached :chef_run do
-    runner = ChefSpec::ServerRunner.new
+    runner = ChefSpec::ServerRunner.new do |node|
+      node.set['lsb']['codename'] = 'rspec'
+    end
     runner.converge(described_recipe)
   end
 
